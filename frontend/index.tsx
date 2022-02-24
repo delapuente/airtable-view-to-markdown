@@ -16,14 +16,20 @@ function ViewToMDConverter() {
         globalConfig.hasPermissionToSet('tableId') &&
         globalConfig.hasPermissionToSet('viewId');
 
-    const tableId =
-        globalConfig.get('tableId') as string | undefined ??
-        cursor.activeTableId!;
+    let tableId = globalConfig.get('tableId') as string | undefined;
+    if (!tableId) {
+        const defaultTableId = cursor.activeTableId;
+        globalConfig.setAsync('tableId', defaultTableId);
+        tableId = defaultTableId;
+    }
     const table = base.getTableById(tableId);
 
-    const viewId =
-        globalConfig.get('viewId') as string | undefined ??
-        cursor.activeViewId!;
+    let viewId = globalConfig.get('viewId') as string | undefined;
+    if (!viewId) {
+        const defaultViewId = cursor.activeViewId;
+        globalConfig.setAsync('viewId', defaultViewId);
+        viewId = defaultViewId;
+    }
     const view =
         table.views.find(view => view.id === viewId) ??
         table.views[0];

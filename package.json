@@ -4,6 +4,7 @@
     "description": "Convert an Airtable view to Markdown",
     "license": "MIT",
     "author": "Salvador de la Puente González <hola@salvadelapuente.com>",
+    "repository": "github:delapuente/airtable-view-to-markdown",
     "dependencies": {
         "@airtable/blocks": "1.8.0",
         "react": "^16.9.0",
